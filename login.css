@@ -1,0 +1,117 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  /* Background */
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+  }
+  
+  /* Login container */
+  .login-container {
+    background: #fff;
+    padding: 40px 35px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+  }
+  
+  /* Heading */
+  .login-container h2 {
+    margin-bottom: 25px;
+    font-size: 26px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  /* Input fields */
+  .login-container input {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+    transition: border-color 0.3s;
+  }
+  
+  .login-container input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 6px rgba(102, 126, 234, 0.5);
+  }
+  
+  /* Button */
+  .login-container button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 18px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .login-container button:hover {
+    background: linear-gradient(135deg, #5a67d8, #6b46c1);
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Extra links */
+  .login-container .links {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .login-container .links a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .login-container .links a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive */
+  @media (max-width: 420px) {
+    .login-container {
+      padding: 30px 20px;
+    }
+  
+    .login-container h2 {
+      font-size: 22px;
+    }
+  }
+  
