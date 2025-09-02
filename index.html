@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1><i class="fas fa-book"></i> Digital Library</h1>
+                <p>Manage your book collection with ease</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Search and Filter Section -->
+            <section class="search-section">
+                <div class="search-container">
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" placeholder="Search books by title, author, or category...">
+                        <button id="searchBtn"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-category="all">All Books</button>
+                        <button class="filter-btn" data-category="fiction">Fiction</button>
+                        <button class="filter-btn" data-category="non-fiction">Non-Fiction</button>
+                        <button class="filter-btn" data-category="science">Science</button>
+                        <button class="filter-btn" data-category="history">History</button>
+                        <button class="filter-btn" data-category="biography">Biography</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-books"></i></div>
+                        <div class="stat-info">
+                            <h3 id="totalBooks">0</h3>
+                            <p>Total Books</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="stat-info">
+                            <h3 id="availableBooks">0</h3>
+                            <p>Available</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-check"></i></div>
+                        <div class="stat-info">
+                            <h3 id="borrowedBooks">0</h3>
+                            <p>Borrowed</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-tags"></i></div>
+                        <div class="stat-info">
+                            <h3 id="totalCategories">0</h3>
+                            <p>Categories</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add Book Section -->
+            <section class="add-book-section">
+                <div class="add-book-container">
+                    <h2><i class="fas fa-plus-circle"></i> Add New Book</h2>
+                    <form id="addBookForm" class="add-book-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bookTitle">Book Title</label>
+                                <input type="text" id="bookTitle" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bookAuthor">Author</label>
+                                <input type="text" id="bookAuthor" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bookCategory">Category</label>
+                                <select id="bookCategory" required>
+                                    <option value="">Select Category</option>
+                                    <option value="fiction">Fiction</option>
+                                    <option value="non-fiction">Non-Fiction</option>
+                                    <option value="science">Science</option>
+                                    <option value="history">History</option>
+                                    <option value="biography">Biography</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="bookISBN">ISBN</label>
+                                <input type="text" id="bookISBN" placeholder="Optional">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bookYear">Publication Year</label>
+                                <input type="number" id="bookYear" min="1000" max="2024">
+                            </div>
+                            <div class="form-group">
+                                <label for="bookStatus">Status</label>
+                                <select id="bookStatus" required>
+                                    <option value="available">Available</option>
+                                    <option value="borrowed">Borrowed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="add-book-btn">
+                            <i class="fas fa-plus"></i> Add Book
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Books Grid Section -->
+            <section class="books-section">
+                <div class="books-header">
+                    <h2><i class="fas fa-list"></i> Book Collection</h2>
+                    <div class="view-toggle">
+                        <button id="gridView" class="view-btn active"><i class="fas fa-th"></i></button>
+                        <button id="listView" class="view-btn"><i class="fas fa-list"></i></button>
+                    </div>
+                </div>
+                <div id="booksContainer" class="books-grid">
+                    <!-- Books will be dynamically inserted here -->
+                </div>
+                <div id="noBooksMessage" class="no-books-message" style="display: none;">
+                    <i class="fas fa-book-open"></i>
+                    <h3>No books found</h3>
+                    <p>Try adjusting your search criteria or add some books to get started.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Book Modal -->
+    <div id="bookModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Book Details</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="book-details">
+                    <div class="book-cover-large">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="book-info">
+                        <h3 id="modalBookTitle"></h3>
+                        <p><strong>Author:</strong> <span id="modalBookAuthor"></span></p>
+                        <p><strong>Category:</strong> <span id="modalBookCategory"></span></p>
+                        <p><strong>ISBN:</strong> <span id="modalBookISBN"></span></p>
+                        <p><strong>Year:</strong> <span id="modalBookYear"></span></p>
+                        <p><strong>Status:</strong> <span id="modalBookStatus"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="borrowBtn" class="action-btn borrow-btn">
+                    <i class="fas fa-hand-holding"></i> Borrow Book
+                </button>
+                <button id="returnBtn" class="action-btn return-btn" style="display: none;">
+                    <i class="fas fa-undo"></i> Return Book
+                </button>
+                <button id="deleteBtn" class="action-btn delete-btn">
+                    <i class="fas fa-trash"></i> Delete Book
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div id="messageContainer" class="message-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
